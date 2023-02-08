@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 
@@ -34,7 +33,7 @@ export default new Vuex.Store({
     login({commit}, user){
       return new Promise((resolve, reject) => {
         commit('auth_request')
-        axios({url: 'http://localhost:8080/login', data: user, method: 'POST'})
+        axios.post( this.state.API + 'login', user )
             .then( resp => {
               const token = resp.data.token
               const user = resp.data.user
@@ -50,10 +49,10 @@ export default new Vuex.Store({
             })
       })
     },
-    register({commit}, user) {
+    signup({commit}, user) {
       return new Promise((resolve, reject) => {
         commit('auth_request')
-        axios({url: 'http://localhost:8080/register', data: user, method: 'POST'})
+        axios.post(this.state.API + 'signup', user)
             .then(resp => {
               const token = resp.data.token
               const user = resp.data.user

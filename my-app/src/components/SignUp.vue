@@ -4,7 +4,7 @@
     <form @submit.prevent="register">
       <label>
         <p>Имя пользователя</p>
-        <input type="text" v-model="user_name">
+        <input type="text" v-model="fio" placeholder="ФИО">
       </label>
       <label>
         <p>Адрес электронной почты</p>
@@ -14,17 +14,19 @@
         <p>Пароль</p>
         <input type="password" v-model="password">
       </label>
-      <input type="submit" value="Зарегистрироваться">
+      <p>
+        <input type="submit" value="Зарегистрироваться">
+      </p>
     </form>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Register",
+  name: "SignUp",
   data(){
     return{
-      name: "",
+      fio: "",
       email: "",
       password: "",
     }
@@ -32,12 +34,12 @@ export default {
   methods:{
     register: function () {
       let data = {
-        name: this.name,
+        fio: this.fio,
         email: this.email,
         password: this.password,
       }
-      this.$store.dispatch('register', data)
-          .then(() => this.router.push('/'))
+      this.$store.dispatch('signup', data)
+          .then(() => this.$router.push('/'))
           .catch(err => console.log(err))
     }
   }

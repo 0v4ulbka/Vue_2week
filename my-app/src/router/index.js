@@ -1,9 +1,7 @@
-import Vue from 'vue'
-import Router from 'vue-router'
 import store from '../store/index.js'
 import HomeView from '../views/HomeView.vue'
 import Login from '../components/Login.vue'
-import Register from "../components/Register.vue";
+import Register from "../components/SignUp.vue";
 import {createRouter, createWebHistory} from 'vue-router'
 
 const routes = [
@@ -18,8 +16,8 @@ const routes = [
     component: Login,
   },
   {
-    path: '/register',
-    name: 'register',
+    path: '/signup',
+    name: 'signup',
     component: Register,
   },
   {
