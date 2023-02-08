@@ -4,7 +4,7 @@ import axios from 'axios'
 export default new Vuex.Store({
   state: {
     status: '',
-    token: localStorage.getItem('token') || '',
+    token: localStorage.getItem('token'),
     user: {},
     API: 'https://jurapro.bhuser.ru/api-shop/'
   },

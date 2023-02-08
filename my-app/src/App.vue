@@ -2,8 +2,8 @@
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> <br>
-    <router-link to="/signup">Зарегистрироваться</router-link> /
-    <router-link to="/login">Войти</router-link>
+    <router-link v-if="!isLoggedIn" to="/signup">Зарегистрироваться</router-link>
+    <router-link v-if="!isLoggedIn" to="/login">Войти</router-link>
     <span v-if="isLoggedIn"> | <a @click="logout">Выйти</a> </span>
   </nav>
   <router-view/>
