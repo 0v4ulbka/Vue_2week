@@ -8,7 +8,7 @@
     <div id="authorization">
       <router-link v-if="!this.$store.state.token" to="/signup">Зарегистрироваться</router-link>
       <router-link v-if="!this.$store.state.token" to="/login">Войти</router-link>
-      <router-link v-if="this.$store.state.token" to="/logout" >Выйти</router-link>
+      <router-link v-if="this.$store.state.token" to="/logout" @click="logout">Выйти</router-link>
     </div>
   </nav>
   <router-view/>
@@ -20,7 +20,11 @@ export default {
 
     },
   methods:{
-
+    logout: function () {
+      this.$store.dispatch('logout')
+          .then(() => this.$router.push('/logout')
+          )
+    }
   },
 }
 
