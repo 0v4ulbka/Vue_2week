@@ -1,10 +1,17 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> <br>
-    <router-link v-if="!isLoggedIn" to="/signup">Зарегистрироваться</router-link>
-    <router-link v-if="!isLoggedIn" to="/login">Войти</router-link>
-    <span v-if="isLoggedIn"> | <a @click="logout">Выйти</a> </span>
+    <router-link to="/"><b id="logo">Просто купить</b></router-link>
+    <div id="buy">
+      <router-link to="Cart">Корзина</router-link>
+      <router-link to="Order">Заказы</router-link>
+    </div>
+    <div id="authorization">
+      <router-link v-if="!isLoggedIn" to="/signup">Зарегистрироваться</router-link>
+      <router-link v-if="!isLoggedIn" to="/login">Войти</router-link>
+      <span v-if="isLoggedIn">
+        <a @click="logout">Выйти</a>
+      </span>
+    </div>
   </nav>
   <router-view/>
 </template>
@@ -19,7 +26,7 @@ export default {
     logout: function (){
       this.$store.dispatch('logout')
           .then(() => {
-            this.$router.push('/login')
+            this.$router.push('/')
           })
     }
   },
@@ -37,15 +44,42 @@ export default {
 }
 
 nav {
-  padding: 30px;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: #2c3e50 solid 2px;
 }
 
 nav a {
   font-weight: bold;
   color: #2c3e50;
+  text-decoration: none;
+}
+
+span{
+  justify-content: right;
 }
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+#logo{
+  float: left;
+  font-size: 24pt;
+}
+#authorization{
+  width: 230px;
+  display: flex;
+  justify-content: space-around;
+}
+#authorization a{
+  cursor: pointer;
+}
+#buy{
+  width: 230px;
+  display: flex;
+  justify-content: space-around;
 }
 </style>

@@ -4,7 +4,7 @@ import axios from 'axios'
 export default new Vuex.Store({
   state: {
     status: '',
-    token: localStorage.getItem('token'),
+    token: localStorage.getItem('token') || '',
     user: {},
     API: 'https://jurapro.bhuser.ru/api-shop/'
   },
@@ -35,8 +35,8 @@ export default new Vuex.Store({
         commit('auth_request')
         axios.post( this.state.API + 'login', user )
             .then( resp => {
-              const token = resp.data.token
-              const user = resp.data.user
+              const token = resp.data.data.user_token
+              const user = resp.data.data.user
               localStorage.setItem('token', token)
               axios.defaults.headers.common['Authorization'] = token
               commit('auth_success', token, user)
@@ -54,7 +54,7 @@ export default new Vuex.Store({
         commit('auth_request')
         axios.post(this.state.API + 'signup', user)
             .then(resp => {
-              const token = resp.data.token
+              const token = resp.data.user_token
               const user = resp.data.user
               localStorage.setItem('token', token)
               axios.defaults.headers.common['Authorization'] = token

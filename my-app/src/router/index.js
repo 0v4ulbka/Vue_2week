@@ -1,14 +1,26 @@
 import store from '../store/index.js'
-import HomeView from '../views/HomeView.vue'
 import Login from '../components/Login.vue'
 import Register from "../components/SignUp.vue";
 import {createRouter, createWebHistory} from 'vue-router'
+import Products from "@/views/Products";
+import Cart from "@/views/Cart";
+import Order from "@/views/Order";
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'products',
+    component: Products,
+  },
+  {
+    path: '/cart',
+    name: 'cart',
+    component: Cart,
+  },
+  {
+    path: '/order',
+    name: 'order',
+    component: Order,
   },
   {
     path: '/login',
@@ -20,16 +32,7 @@ const routes = [
     name: 'signup',
     component: Register,
   },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: function () {
-      return import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-    }
-  }
+
 ]
 
 const router = createRouter({
