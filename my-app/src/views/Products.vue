@@ -17,6 +17,9 @@ export default {
       data_products: [],
     }
   },
+  methods:{
+    
+  },
   mounted() {
     axios.get(this.$store.state.API + 'products')
         .then(response => {this.data_products = response.data})

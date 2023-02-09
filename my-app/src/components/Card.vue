@@ -2,7 +2,7 @@
   <div>
     <p>{{ cardData.name }}</p>
     <p><b>Описание товара: </b>{{ cardData.description }}</p>
-    <p>Цена {{ cardData.price }} &#8381;
+    <p><b>Цена</b> {{ cardData.price }} &#8381;
       <button v-if="this.$store.state.token">В корзину</button>
     </p>
   </div>

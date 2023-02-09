@@ -1,10 +1,11 @@
-import store from '../store/index.js'
+import store from '../store'
 import Login from '../components/Login.vue'
 import Register from "../components/SignUp.vue";
 import {createRouter, createWebHistory} from 'vue-router'
-import Products from "@/views/Products";
-import Cart from "@/views/Cart";
-import Order from "@/views/Order";
+import Products from "@/views/Products.vue";
+import Cart from "@/views/Cart.vue";
+import Order from "@/views/Order.vue";
+import Logout from "@/components/Logout.vue";
 
 const routes = [
   {
@@ -32,15 +33,19 @@ const routes = [
     name: 'signup',
     component: Register,
   },
-
+  {
+    path: '/logout',
+    name: 'logout',
+    component: Logout
+  }
 ]
 
-const router = createRouter({
+const index = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
 
-router.beforeEach((to, from, next) => {
+index.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.requiresAuth)) {
     if(store.getters.isLoggedIn) {
       next()
@@ -52,4 +57,4 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-export default router
+export default index

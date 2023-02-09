@@ -9,7 +9,6 @@ export default new Vuex.Store({
     API: 'https://jurapro.bhuser.ru/api-shop/'
   },
   getters: {
-    isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
   },
   mutations: {
@@ -54,7 +53,7 @@ export default new Vuex.Store({
         commit('auth_request')
         axios.post(this.state.API + 'signup', user)
             .then(resp => {
-              const token = resp.data.user_token
+              const token = resp.data.data.user_token
               const user = resp.data.user
               localStorage.setItem('token', token)
               axios.defaults.headers.common['Authorization'] = token
@@ -68,15 +67,8 @@ export default new Vuex.Store({
             })
       })
     },
-    logout({commit}){
-      return new Promise((resolve, reject) => {
-        commit('logout')
-        localStorage.removeItem('token')
-        delete axios.defaults.headers.common['Authorization']
-        resolve()
-      })
-    }
+
   },
   modules: {
-  }
+  },
 })

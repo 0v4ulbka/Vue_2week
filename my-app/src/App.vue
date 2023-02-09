@@ -6,11 +6,9 @@
       <router-link to="Order">Заказы</router-link>
     </div>
     <div id="authorization">
-      <router-link v-if="!isLoggedIn" to="/signup">Зарегистрироваться</router-link>
-      <router-link v-if="!isLoggedIn" to="/login">Войти</router-link>
-      <span v-if="isLoggedIn">
-        <a @click="logout">Выйти</a>
-      </span>
+      <router-link v-if="!this.$store.state.token" to="/signup">Зарегистрироваться</router-link>
+      <router-link v-if="!this.$store.state.token" to="/login">Войти</router-link>
+      <router-link v-if="this.$store.state.token" to="/logout" >Выйти</router-link>
     </div>
   </nav>
   <router-view/>
@@ -19,16 +17,10 @@
 <script>
 export default {
   computed:{
-    isLoggedIn: function (){
-      return this.$store.getters.isLoggedIn}
+
     },
   methods:{
-    logout: function (){
-      this.$store.dispatch('logout')
-          .then(() => {
-            this.$router.push('/')
-          })
-    }
+
   },
 }
 
