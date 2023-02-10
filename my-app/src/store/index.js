@@ -1,12 +1,14 @@
 import Vuex from 'vuex'
 import axios from 'axios'
+import cardId from '@/components/Card'
+import router from '@/router'
 
 export default new Vuex.Store({
   state: {
     status: '',
     token: localStorage.getItem('token') || '',
     user: {},
-    API: 'https://jurapro.bhuser.ru/api-shop/'
+    API: 'https://jurapro.bhuser.ru/api-shop/',
   },
   getters: {
     authStatus: state => state.status,
@@ -23,10 +25,6 @@ export default new Vuex.Store({
     auth_error(state){
       state.status = 'error'
     },
-    logout(state){
-      state.status = ''
-      state.token = ''
-    }
   },
   actions: {
     login({commit}, user){
@@ -72,11 +70,9 @@ export default new Vuex.Store({
               commit('auth_success')
               axios.get(this.state.API + 'logout')
                   .then(resp => {
-                      const token = resp.data.data.token
-                      const user = resp.data.data.user
+                      const message = resp.data.data.message
                       localStorage.removeItem('token')
-                      axios.defaults.headers.common['Authorization'] = ''
-                      commit('auth_success', token, user)
+                      commit('auth_success', message)
                       resolve(resp)
                   })
                   .catch(err => {
@@ -85,6 +81,19 @@ export default new Vuex.Store({
                       reject(err)
                   })
           })
+      },
+      add_to_cart({commit}, cardId) {
+        return new Promise((resolve) => {
+            axios.post(this.state.API + `cart/${cardId}`, cardId, {
+                headers: {
+                    'ContentType': 'application/json;charset=utf-8',
+                    'Authorization': 'Bearer ' + this.state.token
+                }
+            }).then((response) => {
+                router.push('/')
+            })
+
+        })
       }
 
   },

@@ -3,16 +3,16 @@
     <p>{{ cardData.name }}</p>
     <p><b>Описание товара: </b>{{ cardData.description }}</p>
     <p><b>Цена</b> {{ cardData.price }} &#8381;
-      <button v-if="this.$store.state.token">В корзину</button>
+      <button v-if="this.$store.state.token"
+      @click="AddToCart"
+      >В корзину</button>
     </p>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
-  date(){
+  data(){
     return{
 
     }
@@ -20,7 +20,9 @@ export default {
   name: "Card",
   props: ['cardData'],
   methods: {
-
+    AddToCart: function (){
+      this.$store.dispatch('add_to_cart', this.cardData.id)
+    }
   }
 }
 </script>

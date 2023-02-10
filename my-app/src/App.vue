@@ -17,7 +17,6 @@
 <script>
 export default {
   computed:{
-
     },
   methods:{
     logout: function () {
